@@ -35,12 +35,14 @@ jobs:
       - uses: actions/checkout@v7
       - uses: actions/setup-node@v6
         with:
-          node-version: 20
+          node-version: 24
       - name: Install every skill into every harness, then assert
         run: |
           set -euo pipefail
           SCRATCH=$(mktemp -d)
           cd "$SCRATCH"
+          echo "node: $(node --version) · npx: $(npx --version)"
+          trap 'echo "--- scratch tree after failure ---"; find "$SCRATCH" -maxdepth 4 -not -path "*/node_modules*" | sort' ERR
           npx -y skills@1.8.1 add "$GITHUB_WORKSPACE" --skill '*' \
             -a claude-code -a codex -a cursor -a opencode -a pi \
             -a hermes-agent -a openclaw -a openhands -y --copy
@@ -57,6 +59,8 @@ jobs:
               fi
             done
           done
+          echo "--- scratch tree ---"
+          find "$SCRATCH" -maxdepth 3 -not -path "*/node_modules*" | sort
           exit $fail
 
   security:
@@ -87,7 +91,7 @@ jobs:
       #       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   advisory:
-    name: Advisory lint (skillsaw, ruff, shellcheck)
+    name: Advisory lint (skillsaw, ruff)
     runs-on: ubuntu-latest
     continue-on-error: true
     steps:
@@ -100,11 +104,7 @@ jobs:
         uses: astral-sh/ruff-action@v4.1.0
         with:
           args: check --output-format github
-      - name: Find shell scripts
-        id: sh
-        run: echo "count=$(git ls-files '*.sh' | wc -l)" >> "$GITHUB_OUTPUT"
-      - name: shellcheck
-        if: steps.sh.outputs.count != '0'
-        uses: ludeeus/action-shellcheck@v2
-        with:
-          ignore_paths: node_modules
+      # NOTE: re-add shellcheck (e.g. ludeeus/action-shellcheck@2.0.0 — the
+      # floating v2 tag no longer exists) when the repo gains .sh files.
+      # Action refs are resolved at job setup even when `if:` skips the step,
+      # so a dead ref here fails the whole job.
