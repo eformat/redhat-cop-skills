@@ -1,7 +1,7 @@
 # Default: maintainers review everything
-*                               @eformat @sabre1041 @hultzj
+*                               @eformat @hultzj
 
 # Per-skill rules are appended below as skills land. CI (validate_skills.py)
 # fails any PR adding a skill without its ownership rule here.
-# Format:  skills/<skill-name>/ @<skill-owner> @eformat @sabre1041 @hultzj
-skills/skill-creator/                        @eformat @sabre1041 @hultzj
+# Format:  skills/<skill-name>/ @<skill-owner> @eformat @hultzj
+skills/skill-creator/                        @eformat @hultzj

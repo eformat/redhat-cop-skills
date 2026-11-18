@@ -258,12 +258,12 @@ def test_codeowners_sync_checked(tree: Path):
     findings: list = []
     vs.check_codeowners_sync(tree, findings)
     assert any("CODEOWNERS is missing or empty" in m for _, _, m in findings)
-    (tree / "CODEOWNERS").write_text("* @eformat @sabre1041 @hultzj\n", encoding="utf-8")
+    (tree / "CODEOWNERS").write_text("* @eformat @hultzj\n", encoding="utf-8")
     findings = []
     vs.check_codeowners_sync(tree, findings)
     assert any("no CODEOWNERS rule" in m for _, _, m in findings)
     (tree / "CODEOWNERS").write_text(
-        "* @eformat @sabre1041 @hultzj\nskills/sample-skill/ @someuser @eformat @sabre1041 @hultzj\n",
+        "* @eformat @hultzj\nskills/sample-skill/ @someuser @eformat @hultzj\n",
         encoding="utf-8",
     )
     findings = []

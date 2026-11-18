@@ -7,7 +7,6 @@ This document defines who reviews what and how changes merge.
 | Handle | Role |
 |---|---|
 | [@eformat](https://github.com/eformat) | Maintainer |
-| [@sabre1041](https://github.com/sabre1041) | Maintainer |
 | [@hultzj](https://github.com/hultzj) | Maintainer |
 
 ## Principles
@@ -30,11 +29,6 @@ This document defines who reviews what and how changes merge.
 
 | Path | Reviewers |
 |---|---|
-| `skills/<name>/` | `@<skill owner>` + `@eformat` `@sabre1041` `@hultzj` (per-skill rules in [CODEOWNERS](CODEOWNERS); the validator fails PRs whose skill lacks a CODEOWNERS rule) |
-| `scripts/`, `tests/`, `Makefile`, `requirements-dev.txt` | `@eformat` `@sabre1041` `@hultzj` |
-| `docs/`, `README.md`, `CONTRIBUTING.md` | `@eformat` `@sabre1041` `@hultzj` |
-| `MAINTAINERS.md`, `CODEOWNERS`, `.github/`, `LICENSE` | `@eformat` `@sabre1041` `@hultzj` |
-| `template/`, `AGENTS.md` | `@eformat` `@sabre1041` `@hultzj` |
 
 Keep CODEOWNERS in sync with this matrix when skills are added — CI enforces per-skill rules; the root rules are hand-maintained here.
 

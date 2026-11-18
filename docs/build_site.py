@@ -79,7 +79,7 @@ PAGES = [
         "page_title": "Governance — Red Hat CoP Skills",
         "eyebrow": "Red Hat CoP Skills · governance",
         "dek": "PR-only, tiered approvals, per-skill ownership enforced by CI. "
-               "Maintainers: eformat, sabre1041, hultzj.",
+               "Maintainers: eformat, hultzj.",
         "meta": [
             f'Full model: <a href="{REPO_URL}/blob/main/MAINTAINERS.md">MAINTAINERS.md</a>',
             f'Ownership: <a href="{REPO_URL}/blob/main/CODEOWNERS">CODEOWNERS</a>',

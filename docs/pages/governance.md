@@ -16,7 +16,6 @@
 
 ## Maintainers
 
-[@eformat](https://github.com/eformat) · [@sabre1041](https://github.com/sabre1041) · [@hultzj](https://github.com/hultzj)
 
 ## Ownership in practice
 

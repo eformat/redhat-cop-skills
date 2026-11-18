@@ -229,7 +229,7 @@ def check_codeowners_sync(root: Path, findings: list) -> None:
             add(
                 findings, ERROR, str(codeowners),
                 f"no CODEOWNERS rule for skills/{name}/ — add a line "
-                f"'skills/{name}/ @<owner> @eformat @sabre1041 @hultzj'",
+                f"'skills/{name}/ @<owner> @eformat @hultzj'",
             )
 
 

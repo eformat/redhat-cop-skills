@@ -26,7 +26,7 @@ At least one of the following — check what applies and describe below:
 
 - [ ] `make lint` passes locally (validator, index check, eval check, tests)
 - [ ] README index regenerated with `make index` (if adding/renaming/removing a skill)
-- [ ] CODEOWNERS rule added for new skills (`skills/<name>/ @<owner> @eformat @sabre1041 @hultzj`)
+- [ ] CODEOWNERS rule added for new skills (`skills/<name>/ @<owner> @eformat @hultzj`)
 - [ ] `metadata.version` bumped appropriately (patch/minor/major)
 - [ ] `allowed-tools` scoped to exactly what the skill calls (or omitted deliberately)
 - [ ] Human-approval gate stated in the body for anything writing to external systems
