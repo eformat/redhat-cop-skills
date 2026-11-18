@@ -45,12 +45,17 @@ def check_eval_file(skill_dir: Path) -> list[str]:
             errors.append(f"{ref}: must be an object")
             continue
         case_id = case.get("id")
-        if not isinstance(case_id, str) or not case_id.strip():
-            errors.append(f"{ref}: 'id' is required and must be a non-empty string")
-        elif case_id in seen_ids:
+        if isinstance(case_id, bool) or not isinstance(case_id, (str, int)) or (
+            isinstance(case_id, str) and not case_id.strip()
+        ):
+            errors.append(
+                f"{ref}: 'id' is required and must be a non-empty string or number "
+                "(skillsaw agentskill-evals expects numbers)"
+            )
+        elif str(case_id) in seen_ids:
             errors.append(f"{ref}: duplicate id {case_id!r}")
         else:
-            seen_ids.add(case_id)
+            seen_ids.add(str(case_id))
         prompt = case.get("prompt")
         if not isinstance(prompt, str) or not prompt.strip():
             errors.append(f"{ref} ({case_id!r}): 'prompt' is required and must be non-empty")

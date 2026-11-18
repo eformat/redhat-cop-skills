@@ -54,6 +54,16 @@ def test_duplicate_ids(tmp_path: Path):
     assert any("duplicate id" in e for e in errors)
 
 
+def test_numeric_ids_accepted(tmp_path: Path):
+    numeric = {
+        "skill_name": "sample-skill",
+        "evals": [{"id": 0, "prompt": "p", "assertions": ["a"]}, {"id": 1, "prompt": "p", "assertions": ["a"]}],
+    }
+    make_skill(tmp_path, numeric)
+    errors = ce.check_eval_file(tmp_path / "skills" / "sample-skill")
+    assert errors == []
+
+
 def test_missing_assertions(tmp_path: Path):
     bad = {"skill_name": "sample-skill", "evals": [{"id": "x", "prompt": "p"}]}
     make_skill(tmp_path, bad)

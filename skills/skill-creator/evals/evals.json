@@ -2,7 +2,7 @@
   "skill_name": "skill-creator",
   "evals": [
     {
-      "id": "create-skill-from-workflow",
+      "id": 0,
       "prompt": "I have a workflow I repeat every sprint: pull the RHOAI release notes PDF from my downloads folder, extract the fixed-bug list, and post a summary to our team channel. Turn this into a skill following the repo conventions.",
       "assertions": [
         "The output contains the text \"SKILL.md\".",
@@ -12,7 +12,7 @@
       ]
     },
     {
-      "id": "review-draft-against-conventions",
+      "id": 1,
       "prompt": "Review this skill draft for me: it is named 'MyCoolSkill', the description says 'helps with Jira', and the body jumps straight into steps with no title heading. What needs to change before I submit it to redhat-cop/skills?",
       "assertions": [
         "The output flags that the skill name must be kebab-case and match the directory name.",
@@ -21,8 +21,8 @@
       ]
     },
     {
-      "id": "description-trigger-optimization",
-      "prompt": "My skill keeps under-triggering — users ask for dashboards and the skill never fires. Its description is 'Builds dashboards.' Improve the description for better triggering accuracy.",
+      "id": 2,
+      "prompt": "My skill keeps under-triggering \u2014 users ask for dashboards and the skill never fires. Its description is 'Builds dashboards.' Improve the description for better triggering accuracy.",
       "assertions": [
         "The output proposes a description that enumerates concrete trigger phrases (e.g. 'dashboard', 'data visualization', 'metrics').",
         "The output keeps the proposed description under 500 characters.",

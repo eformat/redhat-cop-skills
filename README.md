@@ -36,7 +36,7 @@ Other handy forms: `npx skills add redhat-cop/skills --list` (browse), `--skill 
 
 | Skill | Description | Version | Maturity | Owner |
 |---|---|---|---|---|
-| [skill-creator](skills/skill-creator/) | Create new skills, modify and improve existing skills, and measure skill performance. Use when users want to create a skill from scratch, edit, or optimize an existing skill, run evals to test a skill, benchmark skill performance with vari… | 1.0.0 | stable | [@eformat](https://github.com/eformat) |
+| [skill-creator](skills/skill-creator/) | Create new skills, modify and improve existing skills, and measure skill performance. Use when users want to create a skill from scratch, edit, or optimize an existing skill, run evals to test a skill, benchmark skill performance with vari… | 1.1.0 | stable | [@eformat](https://github.com/eformat) |
 
 <!-- GENERATED:INDEX:END -->
 
