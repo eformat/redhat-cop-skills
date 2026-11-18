@@ -1,0 +1,94 @@
+name: Skills CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    name: Validate skills, index, evals + tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install dev dependencies
+        run: pip install -r requirements-dev.txt
+      - name: Validate skills
+        run: python scripts/validate_skills.py
+      - name: Check README index freshness
+        run: python scripts/generate_index.py --check
+      - name: Validate eval suites
+        run: python scripts/check_evals.py
+      - name: Tooling tests
+        run: python -m pytest tests/ -q
+
+  install-smoke:
+    name: Cross-harness install smoke test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install every skill into every harness, then assert
+        run: |
+          set -euo pipefail
+          SCRATCH=$(mktemp -d)
+          cd "$SCRATCH"
+          npx -y skills@1.8.1 add "$GITHUB_WORKSPACE" --skill '*' \
+            -a claude-code -a codex -a cursor -a opencode -a pi \
+            -a hermes-agent -a openclaw -a openhands -y --copy
+          skills=$(ls "$GITHUB_WORKSPACE/skills")
+          echo "Skills under test: $skills"
+          fail=0
+          # Oh My Pi and DeepSeek read .agents/skills too (shared dir), so they
+          # are covered by the codex/cursor/opencode/pi targets.
+          for d in .claude/skills .agents/skills .hermes/skills .openhands/skills skills; do
+            for s in $skills; do
+              if [ ! -f "$d/$s/SKILL.md" ]; then
+                echo "::error::skill $s did not land in $d"
+                fail=1
+              fi
+            done
+          done
+          exit $fail
+
+  security:
+    name: Secrets scan
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  advisory:
+    name: Advisory lint (skillsaw, ruff, shellcheck)
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v4
+      - name: skillsaw (skill prompt lint)
+        uses: stbenjam/skillsaw@v0.22.0
+        with:
+          strict: "true"
+      - name: ruff (python in skills/scripts/tests)
+        uses: astral-sh/ruff-action@v3
+        with:
+          args: check --output-format github
+      - name: Find shell scripts
+        id: sh
+        run: echo "count=$(git ls-files '*.sh' | wc -l)" >> "$GITHUB_OUTPUT"
+      - name: shellcheck
+        if: steps.sh.outputs.count != '0'
+        uses: ludeeus/action-shellcheck@v2
+        with:
+          ignore_paths: node_modules
