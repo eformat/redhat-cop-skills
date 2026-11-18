@@ -90,18 +90,15 @@ jobs:
       #     env:
       #       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-  advisory:
-    name: Advisory lint (skillsaw, ruff)
+  lint:
+    name: Lint (skillsaw, ruff)
     runs-on: ubuntu-latest
-    continue-on-error: true
     steps:
       - uses: actions/checkout@v7
+      # skillsaw: only ERRORS fail (repo .skillsaw.yaml sets fail-on: error);
+      # warnings like the seed's token count are visible but never block.
       - name: skillsaw (skill prompt lint)
         uses: stbenjam/skillsaw@v0.22.0
-        with:
-          strict: "true"
-        # step-level so ruff still runs when skillsaw flags findings
-        continue-on-error: true
       - name: ruff (python in skills/scripts/tests)
         uses: astral-sh/ruff-action@v4.1.0
         with:

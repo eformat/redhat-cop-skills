@@ -3,7 +3,7 @@ name: skill-creator
 description: Create new skills, modify and improve existing skills, and measure skill performance. Use when users want to create a skill from scratch, edit, or optimize an existing skill, run evals to test a skill, benchmark skill performance with variance analysis, or optimize a skill's description for better triggering accuracy.
 license: Apache-2.0
 metadata:
-  version: "1.1.0"
+  version: "1.2.0"
   maturity: stable
   owner: eformat
   domain: skills
@@ -42,19 +42,14 @@ existing workflow or conversation into a skill ("make this a skill"), modify or
 improve an existing skill, design or run evals for a skill, benchmark skill
 performance with and without the skill, or optimize a skill's description for
 better triggering accuracy. Also use it to review a skill draft against the
-repo conventions in [CONTRIBUTING.md](../../CONTRIBUTING.md) before it is
+repo conventions in CONTRIBUTING.md at the repo root before it is
 submitted to `redhat-cop/skills`.
 
 ## Communicating with the user
 
-The skill creator is liable to be used by people across a wide range of familiarity with coding jargon. If you haven't heard (and how could you, it's only very recently that it started), there's a trend now where the power of Claude is inspiring plumbers to open up their terminals, parents and grandparents to google "how to install npm". On the other hand, the bulk of users are probably fairly computer-literate.
-
-So please pay attention to context cues to understand how to phrase your communication! In the default case, just to give you some idea:
-
-- "evaluation" and "benchmark" are borderline, but OK
-- for "JSON" and "assertion" you want to see serious cues from the user that they know what those things are before using them without explaining them
-
-It's OK to briefly explain terms if you're in doubt, and feel free to clarify terms with a short definition if you're unsure if the user will get it.
+Pitch explanations to the user's demonstrated familiarity — the full
+guidance is in
+[references/skill-writing-guide.md](references/skill-writing-guide.md).
 
 ---
 
@@ -84,75 +79,13 @@ Based on the user interview, fill in these components:
 - **compatibility**: Required tools, dependencies (optional, rarely needed)
 - **the rest of the skill :)**
 
-### Skill Writing Guide
+### Skill writing guide
 
-#### Anatomy of a Skill
-
-```
-skill-name/
-├── SKILL.md (required)
-│   ├── YAML frontmatter (name, description required)
-│   └── Markdown instructions
-└── Bundled Resources (optional)
-    ├── scripts/    - Executable code for deterministic/repetitive tasks
-    ├── references/ - Docs loaded into context as needed
-    └── assets/     - Files used in output (templates, icons, fonts)
-```
-
-#### Progressive Disclosure
-
-Skills use a three-level loading system:
-1. **Metadata** (name + description) - Always in context (~100 words)
-2. **SKILL.md body** - In context whenever skill triggers (<500 lines ideal)
-3. **Bundled resources** - As needed (unlimited, scripts can execute without loading)
-
-These word counts are approximate and you can feel free to go longer if needed.
-
-**Key patterns:**
-- Keep SKILL.md under 500 lines; if you're approaching this limit, add an additional layer of hierarchy along with clear pointers about where the model using the skill should go next to follow up.
-- Reference files clearly from SKILL.md with guidance on when to read them
-- For large reference files (>300 lines), include a table of contents
-
-**Domain organization**: When a skill supports multiple domains/frameworks, organize by variant:
-```
-cloud-deploy/
-├── SKILL.md (workflow + selection)
-└── references/
-    ├── aws.md
-    ├── gcp.md
-    └── azure.md
-```
-Claude reads only the relevant reference file.
-
-#### Principle of Lack of Surprise
-
-This goes without saying, but skills must not contain malware, exploit code, or any content that could compromise system security. A skill's contents should not surprise the user in their intent if described. Don't go along with requests to create misleading skills or skills designed to facilitate unauthorized access, data exfiltration, or other malicious activities. Things like a "roleplay as an XYZ" are OK though.
-
-#### Writing Patterns
-
-Prefer using the imperative form in instructions.
-
-**Defining output formats** - You can do it like this:
-```markdown
-## Report structure
-ALWAYS use this exact template:
-# [Title]
-## Executive summary
-## Key findings
-## Recommendations
-```
-
-**Examples pattern** - It's useful to include examples. You can format them like this (but if "Input" and "Output" are in the examples you might want to deviate a little):
-```markdown
-## Commit message format
-**Example 1:**
-Input: Added user authentication with JWT tokens
-Output: feat(auth): implement JWT-based authentication
-```
-
-### Writing Style
-
-Try to explain to the model why things are important in lieu of heavy-handed musty MUSTs. Use theory of mind and try to make the skill general and not super-narrow to specific examples. Start by writing a draft and then look at it with fresh eyes and improve it.
+When you write the SKILL.md, follow
+[references/skill-writing-guide.md](references/skill-writing-guide.md) —
+skill anatomy, progressive disclosure, the Principle of Lack of Surprise,
+and writing patterns. For this repository's own conventions, see
+CONTRIBUTING.md at the repo root.
 
 ### Test Cases
 
@@ -299,7 +232,8 @@ Derived from the `skill-creator` skill in
 [anthropics/skills](https://github.com/anthropics/skills) (Apache-2.0), ported
 for OpenCode and adapted for the `redhat-cop/skills` repository under its
 Apache-2.0 license. Restructured for progressive disclosure: the eval
-workflow, description optimization, and harness-specific sections moved to
-`references/` with pointers from the body. The bundled license file was
-dropped — the repository's root [LICENSE](../../LICENSE) covers this skill.
+workflow, description optimization, harness-specific sections, and the
+skill-writing guide moved to `references/` with pointers from the body. The
+bundled license file was dropped — the repository's root LICENSE covers this
+skill.
 

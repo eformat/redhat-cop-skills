@@ -2,7 +2,7 @@ PYTHON ?= python3
 PIP ?= $(PYTHON) -m pip
 
 .DEFAULT_GOAL := help
-.PHONY: help setup lint validate index index-check evals test site clean
+.PHONY: help setup lint validate index index-check evals test ruff skillsaw site clean
 
 help: ## Show this help
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "  \033[36m%-12s\033[0m %s\n", $$1, $$2}'
@@ -12,8 +12,11 @@ setup: ## Install dev dependencies
 
 lint: validate index-check evals test ruff ## Everything CI runs
 
-ruff: ## Advisory lint matching CI (astral-sh/ruff defaults)
+ruff: ## Lint matching CI (astral-sh/ruff defaults)
 	$(PYTHON) -m ruff check --output-format concise .
+
+skillsaw: ## Local skillsaw lint (CI runs it via the action)
+	uvx skillsaw@0.22.0 lint .
 
 validate: ## Validate all skills (spec + house rules)
 	$(PYTHON) scripts/validate_skills.py
