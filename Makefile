@@ -10,7 +10,10 @@ help: ## Show this help
 setup: ## Install dev dependencies
 	$(PIP) install -q -r requirements-dev.txt
 
-lint: validate index-check evals test ## Everything CI runs
+lint: validate index-check evals test ruff ## Everything CI runs
+
+ruff: ## Advisory lint matching CI (astral-sh/ruff defaults)
+	$(PYTHON) -m ruff check --output-format concise .
 
 validate: ## Validate all skills (spec + house rules)
 	$(PYTHON) scripts/validate_skills.py

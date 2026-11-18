@@ -12,7 +12,6 @@ from __future__ import annotations
 import argparse
 import json
 import sys
-from pathlib import Path
 
 from skills_common import SkillError, load_all_skills, one_line, repo_root
 

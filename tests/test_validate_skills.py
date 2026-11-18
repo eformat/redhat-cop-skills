@@ -2,13 +2,10 @@
 
 from __future__ import annotations
 
-import shutil
 from pathlib import Path
 
 import pytest
-
 import validate_skills as vs
-
 
 VALID_FRONTMATTER = """\
 ---

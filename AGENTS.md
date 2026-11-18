@@ -21,7 +21,7 @@ docs/                    # documentation site source (build_site.py, theme/, pag
 
 ```bash
 make setup      # dev deps (pyyaml, pytest, ruff)
-make lint       # everything CI runs: validate + index check + eval check + pytest
+make lint       # everything CI runs: validate + index check + eval check + pytest + ruff
 make validate   # skill validator only
 make index      # regenerate README skill table + site-data/skills.json
 make site       # build the docs site into _site/

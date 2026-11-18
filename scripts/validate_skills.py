@@ -13,7 +13,7 @@ import re
 import sys
 from pathlib import Path
 
-from skills_common import SkillError, iter_skill_dirs, load_all_skills, repo_root
+from skills_common import iter_skill_dirs, load_all_skills, repo_root
 
 ERROR, WARN, INFO = "ERROR", "WARN", "INFO"
 
@@ -151,12 +151,11 @@ def check_skill(skill: dict, findings: list, seen: dict[str, str]) -> None:
 
     # --- allowed-tools (optional, advisory across harnesses) ---
     tools = meta.get("allowed-tools")
-    if tools is not None:
-        if not isinstance(tools, str) or not tools.strip():
-            add(
-                findings, ERROR, loc,
-                "allowed-tools must be a space-separated string (e.g. 'Read Grep Bash'), not a list",
-            )
+    if tools is not None and (not isinstance(tools, str) or not tools.strip()):
+        add(
+            findings, ERROR, loc,
+            "allowed-tools must be a space-separated string (e.g. 'Read Grep Bash'), not a list",
+        )
 
     # --- compatibility / license ---
     compat = meta.get("compatibility")

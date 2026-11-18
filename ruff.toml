@@ -1,0 +1,5 @@
+# ruff enforces repo tooling quality (scripts/, tests/, docs/).
+# Skill-bundled scripts (skills/**) are deliberately excluded: they are often
+# vendored or ported code that should stay drop-in portable, and their quality
+# bar is set at contribution time (see CONTRIBUTING.md).
+extend-exclude = ["skills"]

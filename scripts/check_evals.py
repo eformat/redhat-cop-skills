@@ -83,8 +83,7 @@ def check_eval_file(skill_dir: Path) -> list[str]:
 
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__)
-    ap.add_argument("--strict", action="store_true", help="(reserved) fail on any finding")
-    args = ap.parse_args()
+    ap.parse_args()
 
     root = repo_root()
     all_errors: list[str] = []

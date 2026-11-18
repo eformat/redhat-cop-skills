@@ -14,7 +14,7 @@ import html
 import re
 import shutil
 import sys
-from datetime import date, datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 
 import markdown
@@ -25,7 +25,7 @@ OUT = ROOT / "_site"
 
 # make the generated-catalog helper importable
 sys.path.insert(0, str(ROOT / "scripts"))
-import generate_index  # noqa: E402
+import generate_index
 
 REPO_URL = "https://github.com/redhat-cop/skills"
 
@@ -41,7 +41,7 @@ PAGES = [
                "command into Claude Code, Codex, Cursor, OpenCode, Pi, Hermes, "
                "OpenClaw, OpenHands and DeepSeek.",
         "meta": [
-            f'Spec: <a href="https://agentskills.io/specification">Agent Skills</a>',
+            'Spec: <a href="https://agentskills.io/specification">Agent Skills</a>',
             f'License: <a href="{REPO_URL}/blob/main/LICENSE">Apache-2.0</a>',
             "Install: <code>npx skills add redhat-cop/skills</code>",
         ],
@@ -101,7 +101,7 @@ PAGES = [
 FOOTER = (
     "Red Hat CoP Skills · community-maintained under Apache-2.0 · "
     "not an official Red Hat product · site generated "
-    + datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
+    + datetime.now(UTC).strftime("%Y-%m-%d %H:%M UTC")
 )
 
 MATURITY_DOT = {
