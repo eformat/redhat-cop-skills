@@ -1,0 +1,15 @@
+# skillsaw config.
+# version pins the rule set — without it, rules added after 0.6.0 are
+# silently disabled (context-budget is a 0.7.0+ rule).
+version: 0.22.0
+
+# Token budgets aligned with this repo's documented policy: CONTRIBUTING.md
+# allows SKILL.md up to ~500 lines (validator warns past that), which
+# measures to ~8k tokens at the density of real skills — hence error 8000.
+# Values match autofix-skills' proven production config.
+rules:
+  context-budget:
+    limits:
+      skill:
+        warn: 4000
+        error: 8000

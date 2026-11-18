@@ -266,9 +266,9 @@ packaging in `/tmp/`) applies on any harness.
 
 The agents/ directory contains instructions for specialized subagents. Read them when you need to spawn the relevant subagent.
 
-- `agents/grader.md` — How to evaluate assertions against outputs
-- `agents/comparator.md` — How to do blind A/B comparison between two outputs
-- `agents/analyzer.md` — How to analyze why one version beat another
+- [agents/grader.md](agents/grader.md) — How to evaluate assertions against outputs
+- [agents/comparator.md](agents/comparator.md) — How to do blind A/B comparison between two outputs
+- [agents/analyzer.md](agents/analyzer.md) — How to analyze why one version beat another
 
 The references/ directory has additional documentation:
 - `references/schemas.md` — JSON structures for evals.json, grading.json, etc.
