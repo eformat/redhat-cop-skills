@@ -36,6 +36,7 @@ Other handy forms: `npx skills add redhat-cop/skills --list` (browse), `--skill 
 
 | Skill | Description | Version | Maturity | Owner |
 |---|---|---|---|---|
+| [etcd-health](skills/etcd-health/) | Diagnoses etcd member health, fragmentation and leader status on OpenShift clusters using oc/etcdctl, and performs defragmentation remediation. Use when etcd alarms fire, performance degrades, or before and after etcd maintenance. Based on… | 0.1.0 | experimental | [@eformat](https://github.com/eformat) |
 | [skill-creator](skills/skill-creator/) | Create new skills, modify and improve existing skills, and measure skill performance. Use when users want to create a skill from scratch, edit, or optimize an existing skill, run evals to test a skill, benchmark skill performance with vari… | 1.2.0 | stable | [@eformat](https://github.com/eformat) |
 
 <!-- GENERATED:INDEX:END -->
